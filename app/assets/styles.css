@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #1b1b1b;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 1px solid #333;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.page-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.top-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.bottom-row {
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.graph-card {
+    flex: 2;
+}
+
+.explanation-card {
+    flex: 1;
+    min-height: 500px;
+}
+
+.results-card {
+    width: 100%;
+    min-height: 180px;
+}
