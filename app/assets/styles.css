@@ -8,14 +8,74 @@ body {
 .app-container {
     display: flex;
     min-height: 100vh;
+    background-color: #111;
 }
 
 .sidebar {
-    width: 260px;
-    background-color: #1b1b1b;
-    padding: 20px;
+    width: 250px;
+    min-width: 250px;
+    background-color: #171717;
+    border-right: 1px solid #2c2c2c;
+    padding: 20px 16px;
     box-sizing: border-box;
-    border-right: 1px solid #333;
+}
+
+.sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.sidebar-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f3f3f3;
+}
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #d0d0d0;
+    margin-bottom: 4px;
+}
+
+.sidebar-item {
+    padding: 10px 12px 10px 18px;
+    border-radius: 10px;
+    color: #cfcfcf;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    user-select: none;
+}
+
+.sidebar-item:hover {
+    background-color: #232323;
+    color: white;
+}
+
+.sidebar-item.selected {
+    background-color: #2d2d2d;
+    color: white;
+    font-weight: 600;
+    border-left: 3px solid #ffffff;
+}
+
+.sidebar-item.disabled {
+    color: #666;
+    cursor: default;
+    opacity: 0.7;
+}
+
+.sidebar-item.disabled:hover {
+    background-color: transparent;
+    color: #666;
 }
 
 .main-content {
@@ -27,36 +87,249 @@ body {
 .page-title {
     margin-top: 0;
     margin-bottom: 20px;
+    font-size: 36px;
 }
 
-.top-row {
+.lr-page {
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    align-items: flex-start;
 }
 
-.bottom-row {
-    margin-top: 20px;
+.lr-controls-row {
+    display: flex;
+    gap: 16px;
+    align-items: end;
+    flex-wrap: wrap;
 }
 
-.card {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 14px;
-    padding: 16px;
-    box-sizing: border-box;
+.lr-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 120px;
 }
 
-.graph-card {
-    flex: 2;
+.lr-input-group input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: white;
 }
 
-.explanation-card {
-    flex: 1;
-    min-height: 500px;
+.lr-controls-row button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: white;
+    cursor: pointer;
 }
 
-.results-card {
-    width: 100%;
+.lr-controls-row button:hover {
+    background-color: #2d2d2d;
+}
+
+.page-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.lr-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lr-controls-row {
+    display: flex;
+    gap: 16px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.lr-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.lr-input-group input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: white;
+}
+
+.lr-controls-row button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: white;
+    cursor: pointer;
+}
+
+.lr-controls-row button:hover {
+    background-color: #2d2d2d;
+}
+
+.lr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.lr-card {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.lr-card .js-plotly-plot,
+.lr-card .plot-container {
+    width: 100% !important;
+}
+
+.lr-explanation-card {
+    min-height: 420px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.lr-results-card {
     min-height: 180px;
+}
+
+
+.page-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+.lr-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lr-controls-row {
+    display: flex;
+    gap: 16px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.lr-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.lr-input-group input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: white;
+}
+
+.action-btn,
+.train-btn,
+.playback-btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    color: white;
+    cursor: pointer;
+}
+
+.action-btn {
+    background-color: #2a2a2a;
+}
+
+.action-btn:hover {
+    background-color: #363636;
+}
+
+.train-btn {
+    background-color: #365c2d;
+    border-color: #4f7b43;
+    font-weight: 600;
+}
+
+.train-btn:hover {
+    background-color: #44733a;
+}
+
+.playback-btn {
+    background-color: #24324a;
+    border-color: #3d557c;
+}
+
+.playback-btn:hover {
+    background-color: #304467;
+}
+
+.playback-btn:disabled {
+    background-color: #171b22;
+    border-color: #2a3240;
+    color: #6e7683;
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.lr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.lr-card {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.lr-card .js-plotly-plot,
+.lr-card .plot-container {
+    width: 100% !important;
+}
+
+.lr-explanation-card {
+    min-height: 420px;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.lr-results-card {
+    min-height: 400px;
+}
+
+.lr-math-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.lr-math-table th,
+.lr-math-table td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: left;
+}
+
+.lr-math-table th {
+    background-color: #1f1f1f;
 }

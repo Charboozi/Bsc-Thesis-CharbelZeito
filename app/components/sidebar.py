@@ -1,46 +1,51 @@
-from dash import html, dcc
+from dash import html
 
 
-def create_sidebar():
-    return [
-        html.H2("Models"),
-        html.Label("Learning type"),
-        dcc.Dropdown(
-            id="learning-type",
-            options=[
-                {"label": "Supervised", "value": "supervised"},
-                {"label": "Unsupervised", "value": "unsupervised"},
-            ],
-            value="supervised",
-            clearable=False,
-        ),
-        html.Br(),
-        html.Label("Model"),
-        dcc.Dropdown(
-            id="model-select",
-            options=[
-                {"label": "Linear Regression", "value": "linear_regression"},
-                {"label": "Logistic Regression", "value": "logistic_regression"},
-            ],
-            value="linear_regression",
-            clearable=False,
-        ),
-        html.Br(),
-        html.Label("Learning rate"),
-        dcc.Slider(
-            id="learning-rate",
-            min=0.001,
-            max=1.0,
-            step=0.001,
-            value=0.01,
-            tooltip={"placement": "bottom", "always_visible": True},
-        ),
-        html.Br(),
-        html.Label("Epochs"),
-        dcc.Input(id="epochs", type="number", value=100, min=1, step=1),
-        html.Br(),
-        html.Br(),
-        html.Button("Start", id="start-button", n_clicks=0),
-        html.Button("Pause", id="pause-button", n_clicks=0, style={"marginLeft": "10px"}),
-        html.Button("Reset", id="reset-button", n_clicks=0, style={"marginLeft": "10px"}),
-    ]
+def nav_item(label: str, item_id: str, selected: bool = False, disabled: bool = False):
+    class_name = "sidebar-item"
+    if selected:
+        class_name += " selected"
+    if disabled:
+        class_name += " disabled"
+
+    return html.Div(
+        label,
+        id=item_id,
+        className=class_name,
+        n_clicks=0 if not disabled else None,
+    )
+
+
+def create_sidebar(selected_model: str = "linear_regression"):
+    return html.Div(
+        className="sidebar-inner",
+        children=[
+            html.H2("ML Visualizer", className="sidebar-title"),
+
+            html.Div(
+                className="sidebar-section",
+                children=[
+                    html.Div("Supervised", className="sidebar-section-title"),
+                    nav_item(
+                        "Linear Regression",
+                        "nav-linear-regression",
+                        selected=selected_model == "linear_regression",
+                    ),
+                    nav_item(
+                        "Logistic Regression",
+                        "nav-logistic-regression",
+                        selected=selected_model == "logistic_regression",
+                    ),
+                ],
+            ),
+
+            html.Div(
+                className="sidebar-section",
+                children=[
+                    html.Div("Unsupervised", className="sidebar-section-title"),
+                    nav_item("K-Means", "nav-kmeans", disabled=True),
+                    nav_item("PCA", "nav-pca", disabled=True),
+                ],
+            ),
+        ],
+    )
